@@ -1,0 +1,31 @@
+--- advancepac-0.58.0/makefile.orig	2002-04-26 10:03:38.000000000 +0200
++++ advancepac-0.58.0/makefile	2024-04-21 13:29:58.868772158 +0200
+@@ -290,7 +290,7 @@ TARGETLDFLAGS += -Xlinker -Map -Xlinker
+ endif
+ 
+ # Target LIBS
+-TARGETLIBS += -lz
++TARGETLIBS += -lm -lz
+ 
+ ifeq ($(TARGET),mess)
+ include $(TARGETSRC)/core.mak
+--- advancepac-0.58.0/advance/advance.mak.orig	2002-04-26 10:03:38.000000000 +0200
++++ advancepac-0.58.0/advance/advance.mak	2024-04-21 14:55:23.751008288 +0200
+@@ -454,7 +454,7 @@ ifeq ($(HOST_TARGET),linux)
+ VCFLAGS += \
+ 	-DUSE_VIDEO_SVGALIB -DUSE_VIDEO_FB -DUSE_VIDEO_SLANG \
+ 	-DUSE_INPUT_SVGALIB
+-VLIBS = -lslang -lvga
++VLIBS = -lslang -lvga -lm
+ VOBJS += \
+ 	$(VOBJ)/$(HOST_TARGET)/os.o \
+ 	$(VOBJ)/$(HOST_TARGET)/vsvgab.o \
+@@ -650,7 +650,7 @@ CFGCFLAGS += \
+ 	-DUSE_VIDEO_SVGALIB -DUSE_VIDEO_FB -DUSE_VIDEO_SLANG \
+ 	-DUSE_INPUT_SVGALIB \
+ 	-Iadvance/$(HOST_TARGET)
+-CFGLIBS = -lslang -lvga
++CFGLIBS = -lslang -lvga -lm
+ CFGOBJS += \
+ 	$(CFGOBJ)/$(HOST_TARGET)/os.o \
+ 	$(CFGOBJ)/$(HOST_TARGET)/vsvgab.o \

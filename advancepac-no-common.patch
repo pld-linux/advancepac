@@ -1,0 +1,32 @@
+--- advancepac-0.58.0/advance/lib/sounddrv.h.orig	2002-04-26 10:03:39.000000000 +0200
++++ advancepac-0.58.0/advance/lib/sounddrv.h	2024-04-21 12:59:02.308830007 +0200
+@@ -82,7 +82,7 @@ struct sound_state_struct {
+ 	char name[DEVICE_NAME_MAX];
+ };
+ 
+-struct sound_state_struct sound_state;
++extern struct sound_state_struct sound_state;
+ 
+ void sound_reg(struct conf_context* config_context);
+ void sound_reg_driver(struct conf_context* config_context, sound_driver* driver);
+--- advancepac-0.58.0/advance/lib/sounddrv.c.orig	2002-04-26 10:03:39.000000000 +0200
++++ advancepac-0.58.0/advance/lib/sounddrv.c	2024-04-21 15:27:01.474060773 +0200
+@@ -35,6 +35,8 @@
+ #include <stdio.h>
+ #include <string.h>
+ 
++struct sound_state_struct sound_state;
++
+ void sound_default(void) {
+ 	sound_state.is_initialized_flag = 1;
+ 	strcpy(sound_state.name, "auto");
+--- advancepac-0.58.0/srcpac/cpu/m68000/m68kmame.c.orig	2024-04-21 12:54:31.306964816 +0200
++++ advancepac-0.58.0/srcpac/cpu/m68000/m68kmame.c	2024-04-21 12:59:56.818534702 +0200
+@@ -6,7 +6,6 @@
+ 
+ /* global access */
+ 
+-int m68k_ICount;
+ struct m68k_memory_interface m68k_memory_intf;
+ 
+ #ifndef A68K0

@@ -1,0 +1,48 @@
+--- advancepac-0.58.0/srcpac/usrintrf.c.orig	2024-04-21 12:21:48.377598918 +0200
++++ advancepac-0.58.0/srcpac/usrintrf.c	2024-04-21 12:26:45.782654403 +0200
+@@ -1954,9 +1954,9 @@ static int settraksettings(struct mame_b
+ 				case 1:
+ 					strcat (label[i], ui_getstring (UI_reverse));
+ 					if (reverse)
+-						sprintf(setting[i],ui_getstring (UI_on));
++						strcpy(setting[i],ui_getstring (UI_on));
+ 					else
+-						sprintf(setting[i],ui_getstring (UI_off));
++						strcpy(setting[i],ui_getstring (UI_off));
+ 					if (i == sel) arrowize = 3;
+ 					break;
+ 				case 2:
+@@ -1967,9 +1967,9 @@ static int settraksettings(struct mame_b
+ 				case 3:
+ 					strcat (label[i], ui_getstring (UI_center));
+ 					if (center)
+-						sprintf(setting[i],ui_getstring (UI_on));
++						strcpy(setting[i],ui_getstring (UI_on));
+ 					else
+-						sprintf(setting[i],ui_getstring (UI_off));
++						strcpy(setting[i],ui_getstring (UI_off));
+ 					if (i == sel) arrowize = 3;
+ 					break;
+ 			}
+--- advancepac-0.58.0/srcpac/info.c.orig	2024-04-21 12:27:14.269166745 +0200
++++ advancepac-0.58.0/srcpac/info.c	2024-04-21 12:30:45.558022095 +0200
+@@ -307,7 +307,7 @@ static void print_game_rom(FILE* out, co
+ 			char name[100];
+ 			int offset, length, crc, in_parent;
+ 
+-			sprintf(name,ROM_GETNAME(rom));
++			strcpy(name,ROM_GETNAME(rom));
+ 			offset = ROM_GETOFFSET(rom);
+ 			crc = ROM_GETCRC(rom);
+ 
+--- advancepac-0.58.0/advance/v/v.c.orig	2002-04-26 10:03:40.000000000 +0200
++++ advancepac-0.58.0/advance/v/v.c	2024-04-21 13:11:07.564900957 +0200
+@@ -1976,7 +1976,7 @@ int os_main(int argc, char* argv[]) {
+ 	video_crtc_container_init(&selected);
+ 
+ 	if (video_crtc_container_load(the_config, &selected) != 0) {
+-		fprintf(stderr,video_error_description_get());
++		fputs(video_error_description_get(), stderr);
+ 		goto err_video;
+ 	}
+ 
